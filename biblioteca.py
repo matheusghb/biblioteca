@@ -5,9 +5,8 @@ class biblio:
         self.ano = ano
         self.status = status
 
-    def tome carai! tome carai! tome carai! porra! tome carai!
-
-biblioteca = [:]
+biblioteca = []
+alt = ''
 
 while (alt != 's'):
     alt = input("Adicionar - a - emprestar - e - devolver - d - sair - s - ")
