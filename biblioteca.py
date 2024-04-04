@@ -1,13 +1,36 @@
-class biblio:
-    def __init__ (self, titulo, autor, ano, status):
-        self.titulo = titulo
-        self.autor = autor
-        self.ano = ano
-        self.status = status
+from livro import Livro
 
-biblioteca = []
-alt = ''
+class Biblioteca:
+    def __init__(self):
+        self.livros = []
 
-while (alt != 's'):
-    alt = input("Adicionar - a - emprestar - e - devolver - d - sair - s - ")
+    def adicionar_livro(self, livro):
+        self.livros.append(livro)
 
+    def emprestar_livro(self, titulo):
+        for livro in self.livros:
+            if livro.titulo == titulo:
+                if livro.esta_disponivel():
+                    livro.alterar_status("emprestado")
+                    print(f"{livro.titulo} foi emprestado.")
+                else:
+                    print("Este livro já está emprestado.")
+                return
+        print("Livro não encontrado na biblioteca.")
+
+    def devolver_livro(self, titulo):
+        for livro in self.livros:
+            if livro.titulo == titulo:
+                if not livro.esta_disponivel():
+                    livro.alterar_status("disponível")
+                    print(f"{livro.titulo} foi devolvido.")
+                else:
+                    print("Este livro já está disponível.")
+                return
+        print("Livro não encontrado na biblioteca.")
+
+    def listar_livros_disponiveis(self):
+        print("Livros disponíveis na biblioteca:")
+        for livro in self.livros:
+            if livro.esta_disponivel():
+                print(f"- {livro.titulo} (Autor: {livro.autor}, Ano: {livro.ano_publicacao})")
